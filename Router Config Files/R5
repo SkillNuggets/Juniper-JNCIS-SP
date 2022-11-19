@@ -1,0 +1,28 @@
+set system login user lab uid 2000
+set system login user lab class super-user
+set system login user lab authentication encrypted-password "$6$TWFIxBqy$NFhoCfaKDzFWKOIjqiryW8CYiOUu5HhZyGzqMIIoIf41rGem4wvxEO3Mpm08H/Re0KTQIFUzlRJD6pUqiUd2V."
+set system root-authentication encrypted-password "$6$5725VqQz$O2kY7NDaaK3AmXkKGKY8oPKkAUN2XCxEUndYZiYoYZXCRI4BrqtgRl4t9mK9H55/miWM9XSWkyPlrYUULb2sj0"
+set system host-name R5
+set system syslog user * any emergency
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system syslog file interactive-commands interactive-commands any
+set system processes dhcp-service traceoptions file dhcp_logfile
+set system processes dhcp-service traceoptions file size 10m
+set system processes dhcp-service traceoptions level all
+set system processes dhcp-service traceoptions flag packet
+set chassis aggregated-devices ethernet device-count 2
+set chassis fpc 0 pic 0 tunnel-services bandwidth 1g
+set interfaces ge-0/0/1 unit 0 family inet address 10.10.51.5/24
+set interfaces ge-0/0/2 unit 0 family inet address 10.10.52.5/24
+set interfaces ge-0/0/3 unit 0 family inet address 10.10.53.5/24
+set interfaces ge-0/0/4 unit 0 family inet address 10.10.54.5/24
+set interfaces fxp0 unit 0 family inet dhcp vendor-id Juniper-vmx-VM6372543E56
+set interfaces lo0 unit 0 family inet address 5.5.5.5/32
+set routing-options router-id 55.55.55.55
+set protocols ospf area 0.0.0.0 interface lo0.0 passive
+set protocols ospf area 0.0.0.0 interface ge-0/0/1.0
+set protocols ospf area 0.0.0.0 interface ge-0/0/2.0
+set protocols ospf area 0.0.0.0 interface ge-0/0/3.0
+set protocols ospf area 0.0.0.0 interface ge-0/0/4.0
+

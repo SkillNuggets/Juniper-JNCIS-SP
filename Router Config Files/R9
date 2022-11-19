@@ -1,0 +1,27 @@
+set system login user lab uid 2000
+set system login user lab class super-user
+set system login user lab authentication encrypted-password "$6$mZu18OUv$11huY8WYfcMqHxqYsa1laWbZNPS/Glg8fb9904SQCg3fZ4rFnFuDVl6u9iph/aglbrfSgifaMHCU6rdJIGaBQ1"
+set system root-authentication encrypted-password "$6$5725VqQz$O2kY7NDaaK3AmXkKGKY8oPKkAUN2XCxEUndYZiYoYZXCRI4BrqtgRl4t9mK9H55/miWM9XSWkyPlrYUULb2sj0"
+set system host-name R9
+set system syslog user * any emergency
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system syslog file interactive-commands interactive-commands any
+set system processes dhcp-service traceoptions file dhcp_logfile
+set system processes dhcp-service traceoptions file size 10m
+set system processes dhcp-service traceoptions level all
+set system processes dhcp-service traceoptions flag packet
+set chassis aggregated-devices ethernet device-count 2
+set chassis fpc 0 pic 0 tunnel-services bandwidth 1g
+set interfaces ge-0/0/0 unit 0 family inet address 100.100.100.9/24
+set interfaces ge-0/0/9 unit 0 family inet address 10.10.49.9/24
+set interfaces fxp0 unit 0 family inet dhcp vendor-id Juniper-vmx-VM6372543E56
+set interfaces lo0 unit 0 family inet address 9.9.9.9/32
+set routing-options router-id 9.9.9.9
+set routing-options autonomous-system 65003
+set protocols bgp group ext type external
+set protocols bgp group ext local-address 100.100.100.9
+set protocols bgp group ext neighbor 100.100.100.1 peer-as 65004
+set policy-options policy-statement fromBGP term 1 from protocol bgp
+set policy-options policy-statement fromBGP term 1 then accept
+
